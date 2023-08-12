@@ -101,7 +101,7 @@
                       </td>
                       <td><span class="badge bg-primary">30%</span></td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                       <td>4.</td>
                       <td>Fix and squish bugs</td>
                       <td>
@@ -110,7 +110,7 @@
                         </div>
                       </td>
                       <td><span class="badge bg-success">90%</span></td>
-                    </tr>
+                    </tr> --}}
                   </tbody>
                 </table>
               </div>
