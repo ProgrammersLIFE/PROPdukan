@@ -49,7 +49,7 @@ class adminController extends Controller
         if (\Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect('dashboard');
         }else{
-            return back()->with('error', 'Invalid Credentials...');
+            return back()->with('error-message', 'Invalid Credentials...');
         }
     }
 
@@ -90,7 +90,7 @@ class adminController extends Controller
                 return back()->with('error-message', 'Invalid Token Id...');
             }
     
-            return view('user/pages/resetPassword', compact('admin'));
+            return view('admin/pages/resetPassword', compact('admin'));
         } catch (\Exception $e) {
             return ($e->getMessage());
         }
@@ -105,8 +105,11 @@ class adminController extends Controller
                 return redirect()->back()->with('error-message', 'Confirm Password does not match..');
             }
 
-            Admin::find($id)->update(['password' => bcrypt($password)]);
-            return redirect('user-login')->with('success-message', 'Your password has been changed...');
+            $update = Admin::find($id)->update(['password' => bcrypt($password)]);
+            if ($update) {
+                return redirect('admin-login')->with('success-message', 'Your password has been changed...');
+            }
+            return redirect()->back()->with('error-message', 'Could not Update at the moment, Please try again..');
         } catch (\Exception $e) {
             return ($e->getMessage());
         }

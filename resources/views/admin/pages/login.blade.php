@@ -24,7 +24,17 @@
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
-
+      @if ($message = Session::get('success-message'))
+      <div class="alert alert-success alert-block">
+          <button type="button" class="close" data-dismiss="alert">×</button>	
+              <strong>{{ $message }}</strong>
+      </div>
+      @elseif ($message = Session::get('error-message'))
+      <div class="alert alert-danger alert-block">
+          <button type="button" class="close" data-dismiss="alert">×</button>	
+              <strong>{{ $message }}</strong>
+      </div>
+  @endif 
       <form action="{{ route('admin-login') }}" method="post">
 		@csrf
         <div class="input-group mb-3">
