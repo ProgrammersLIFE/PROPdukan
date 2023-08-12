@@ -111,5 +111,22 @@ class adminController extends Controller
             return ($e->getMessage());
         }
    }
+
+   //Routes
+   public function routes(request $request){
+    // At the time of submit
+    if($request->isMethod('post')){
+        $route = [
+            "label" => $request->label,
+            "icon" => $request->icon,
+            "route" => isset($request->route) ? $request->route : '#',
+            "is_active" => 1,
+            "is_parent" => isset($request->is_parents   ) ? 1 : 0,
+        ];
+        Route::create($route);
+        return response()->json(['status' => 200, 'message' => 'Route created successfuly']);
+    }
+    return view("admin/pages/route");
+}
     
 }

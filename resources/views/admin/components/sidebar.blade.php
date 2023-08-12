@@ -13,6 +13,12 @@ $sidebar = [
                 'icon' => 'nav-icon fas fa-user'
             ],
             [
+                'is_parent' => 0,
+                'label' => 'Route',
+                'route' => 'routes',
+                'icon' => 'nav-icon fa fa-route'
+            ],
+            [
                 'is_parent' => 1,
                 'label' => 'Email',
                 'route' => 'dashboard',

@@ -31,6 +31,9 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('dashboard5', [App\Http\Controllers\adminController::class, 'dashboard5'])->name('dashboard5');
     Route::get('dashboard6', [App\Http\Controllers\adminController::class, 'dashboard6'])->name('dashboard6');
     Route::get('admin-logout', [App\Http\Controllers\adminController::class, 'logout'])->name('admin-logout');
+    //Route
+    Route::get('routes', [App\Http\Controllers\adminController::class, 'routes'])->name('routes');
+    Route::post('routes', [App\Http\Controllers\adminController::class, 'routes'])->name('routes');
     
 });
 
