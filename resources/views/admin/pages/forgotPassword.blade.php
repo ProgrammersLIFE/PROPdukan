@@ -23,7 +23,7 @@
       <img src="{{ url('/') }}/admin/images/logo.png" alt="Logo" height="100" >
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Reset Your Password</p>
+      <p class="login-box-msg">Forgot Your Password</p>
         {{-- Error Display --}}
         <div class="success" id="welcome">
             @if ($message = Session::get('success-message'))
