@@ -92,9 +92,9 @@
     
   });
 
-  setTimeout(function(){
-            document.getElementById('welcome').style.display = 'none';
-        }, 5000);
+  // setTimeout(function(){
+  //           document.getElementById('welcome').style.display = 'none';
+  //       }, 5000);
 </script>
 </body>
 </html>
