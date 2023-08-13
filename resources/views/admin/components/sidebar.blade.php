@@ -15,7 +15,7 @@ $sidebar = [
             [
                 'is_parent' => 0,
                 'label' => 'Route',
-                'route' => 'routes',
+                'route' => 'routes/index',
                 'icon' => 'nav-icon fa fa-route'
             ],
             [

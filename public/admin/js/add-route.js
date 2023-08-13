@@ -12,7 +12,11 @@ $(document).ready(function () {
     $('#form').submit(function (e) { 
         e.preventDefault(); 
         var url = $(this).attr('data-action');
-
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax({
             type: "post",
             url: url,
@@ -22,9 +26,14 @@ $(document).ready(function () {
             cache: false,
             processData: false,
             success: function (response) {
-                console.log(response);
+                if(response.status == 200){
+
+                }
             }
         }); 
+    });
+    $(document).on('click', '#remove', function(){
+        $(this).closest('tr').remove();
     });
 });
 var count = 1;
@@ -39,7 +48,7 @@ addMore = () =>{
                             <input type="text" class="form-control" name="data[${count}][route]" placeholder="Route" />
                         </th>
                         <th>
-                            <button class="btn btn-danger">Remove</button>
+                            <button class="btn btn-danger" id="remove" type="button">Remove</button>
                         </th>
                     </tr>`;
     

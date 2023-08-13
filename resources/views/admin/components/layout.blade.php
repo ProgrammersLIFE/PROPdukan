@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>AdminLTE 3 | DataTables</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -15,6 +16,8 @@
   <link rel="stylesheet" href="{{ url('/') }}/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ url('/') }}/admin/dist/css/adminlte.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ url('/') }}/admin/plugins/toastr/toastr.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -64,37 +67,8 @@
 <script src="{{ url('/') }}/admin/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ url('/') }}/admin/dist/js/demo.js"></script>
+<!-- Toastr -->
+<script src="{{ url('/') }}/admin/plugins/toastr/toastr.min.js"></script>
 <!-- Page specific script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-       "ajax": "{{ route('users') }}",
-       "columns": [
-            {data: 'id', name: 'id'},
-            {data: 'name', name: 'name'},
-            {data: 'email', name: 'email'},
-            {data: 'action', name: 'action', orderable: false, searchable: false},
-        ]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-    
-  });
-
-  // setTimeout(function(){
-  //           document.getElementById('welcome').style.display = 'none';
-  //       }, 5000);
-</script>
 </body>
 </html>
