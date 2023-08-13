@@ -13,5 +13,4 @@ $(function () {
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    
   });

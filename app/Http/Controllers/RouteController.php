@@ -22,7 +22,12 @@ class RouteController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        
-                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                            $btn = '<a href="'.route("routes/create").'" class="edit btn btn-primary btn-sm">
+                                <i class="fa-solid fa-solid fa fa-edit"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="edit btn btn-danger btn-sm">
+                                <i class="fa-solid fa-solid fa fa-trash"></i>
+                            </a>';
       
                             return $btn;
                     })
