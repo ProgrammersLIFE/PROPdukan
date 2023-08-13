@@ -39,7 +39,7 @@
             @endif       
         </div>
         {{-- End Error Display --}}
-      <form action="{{ route('reset-password', $user->id) }}" method="post">
+      <form action="{{ route('reset-password', $admin->id) }}" method="post">
 		@csrf
         <div class="input-group mb-3">
           <input type="password" name="password" class="form-control" placeholder="Password..">
