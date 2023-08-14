@@ -35,6 +35,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('routes/index', [App\Http\Controllers\routeController::class, 'index'])->name('routes/index');
     Route::get('routes/create', [App\Http\Controllers\routeController::class, 'create'])->name('routes/create');
     Route::post('routes/create', [App\Http\Controllers\routeController::class, 'create'])->name('routes/create');
+    Route::get('routes/delete/{id}', [App\Http\Controllers\routeController::class, 'delete'])->name('routes/delete/{id}');
 });
 
 // Forgot Password

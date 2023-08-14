@@ -13,9 +13,6 @@ class ChildrenRoutes extends Model
     protected $guarded;
 
     public function getRoutes(){
-        return DB::table('children_routes')
-            ->rightJoin('routes', 'routes.id', 'children_routes.parents_id')
-            ->select('children_routes.*', 'routes.label AS parent_label')
-            ->get();
+        return DB::table('routes')->get();
     }
 }
