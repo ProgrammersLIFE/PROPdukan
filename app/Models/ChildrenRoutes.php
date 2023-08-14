@@ -14,7 +14,7 @@ class ChildrenRoutes extends Model
 
     public function getRoutes(){
         return DB::table('children_routes')
-            ->join('routes', 'routes.id', 'children_routes.parents_id')
+            ->rightJoin('routes', 'routes.id', 'children_routes.parents_id')
             ->select('children_routes.*', 'routes.label AS parent_label')
             ->get();
     }

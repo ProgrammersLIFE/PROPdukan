@@ -27,7 +27,8 @@ $(document).ready(function () {
             processData: false,
             success: function (response) {
                 if(response.status == 200){
-
+                    $('.alert-success').removeClass('hide');
+                    $('.message').text(response.message);
                 }
             }
         }); 
@@ -35,10 +36,13 @@ $(document).ready(function () {
     $(document).on('click', '#remove', function(){
         $(this).closest('tr').remove();
     });
+    $(document).on('click', '.close', function(){
+        location.reload();
+    });
 });
-var count = 1;
+
 addMore = () =>{
-    count++;
+    var count = $('#myTable tr').length;
     let adddata = `<tr>
                         <th>${count}</th>
                         <th>
@@ -54,5 +58,8 @@ addMore = () =>{
     
 
     $('#tbody').append(adddata);
+}
+getDelete=(id)=>{
+    alert('ojefkjk');
 }
 

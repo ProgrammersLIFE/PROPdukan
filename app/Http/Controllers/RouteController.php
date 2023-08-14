@@ -22,10 +22,10 @@ class RouteController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        
-                            $btn = '<a href="'.route("routes/create").'" class="edit btn btn-primary btn-sm">
+                            $btn = '<a href="'.url("routes/create?id=$row->id").'" class="edit btn btn-primary btn-sm">
                                 <i class="fa-solid fa-solid fa fa-edit"></i>
                             </a>
-                            <a href="javascript:void(0)" class="edit btn btn-danger btn-sm">
+                            <a onclick="getDelete('. $row->id .')" class="btn btn-danger btn-sm">
                                 <i class="fa-solid fa-solid fa fa-trash"></i>
                             </a>';
       
@@ -37,8 +37,70 @@ class RouteController extends Controller
         return view('admin/pages/routes/index');
     }
 
-    public function routes(request $request){
+    public function create(request $request){
+        $children_routes = [];
+        $route = [];
+        $selected = [
+            'id' => null,
+            'label' => null,
+            'icon' => null,
+            'route' => null,
+            'is_parents' => null,
+        ];
+
         if($request->isMethod('post')){
+            $route = [
+                "label" => $request->label,
+                "icon" => $request->icon,
+                "route" => isset($request->route) ? $request->route : '#',
+                "is_active" => 1,
+                "is_parent" => isset($request->is_parents   ) ? 1 : 0,
+            ];
+            if($request->input('id') > 0){
+                $message = "Updated";
+                Route::find($request->input('id'))->update($route);
+            }else{
+                $message = "Created";
+                Route::create($route);
+            }
+            $routes = Route::latest()->first();
+            if(isset($request->data)){
+                foreach($request->data as $key => $value){
+                    $data = [
+                        "parents_id" => $routes->id,
+                        "label" => $value['label'],
+                        "route" => $value['route'],
+                        "is_active" => 1,
+                    ];
+                    if(isset($value['child_id'])){
+                        ChildrenRoutes::find($value['child_id'])->update($data);
+                    }else{
+                        ChildrenRoutes::create($data);
+                    }
+                }
+            }
+            
+            return response()->json(['status' => 200, 'message' => 'Route '.$message.' successfuly']);
+        }
+
+        // This section is for edit page
+        if($request->input('id')){
+            $children_route = ChildrenRoutes::find($request->input('id'));
+            $route =  Route::find($children_route->parents_id);
+            $selected['id'] = $route->id;
+            $selected['label'] = $route->label;
+            $selected['icon'] = $route->icon;
+            $selected['route'] = $route->route;
+            $selected['is_parents'] = $route->is_parent;
+
+            $children_routes = ChildrenRoutes::where('parents_id', $children_route->parents_id)->get();
+        }
+        return view("admin/pages/routes/create", compact('selected', 'children_routes'));
+    }
+
+    public function edit($id, Request $request){
+        if($request->isMethod('post')){
+            return $request->all();
             $route = [
                 "label" => $request->label,
                 "icon" => $request->icon,
@@ -59,6 +121,10 @@ class RouteController extends Controller
             }
             return response()->json(['status' => 200, 'message' => 'Route created successfuly']);
         }
-        return view("admin/pages/routes/create");
+        $children_route = ChildrenRoutes::find($id);
+        $route =  Route::find($children_route->parents_id);
+        $children_routes = ChildrenRoutes::where('parents_id', $children_route->parents_id)->get();
+        return view("admin/pages/routes/create", compact('route', 'children_routes'));
     }
+
 }

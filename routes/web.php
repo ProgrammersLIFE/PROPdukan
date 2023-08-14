@@ -33,9 +33,8 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('admin-logout', [App\Http\Controllers\adminController::class, 'logout'])->name('admin-logout');
     //Route
     Route::get('routes/index', [App\Http\Controllers\routeController::class, 'index'])->name('routes/index');
-    Route::get('routes/create', [App\Http\Controllers\routeController::class, 'routes'])->name('routes/create');
-    Route::post('routes/create', [App\Http\Controllers\routeController::class, 'routes'])->name('routes/create');
-    
+    Route::get('routes/create', [App\Http\Controllers\routeController::class, 'create'])->name('routes/create');
+    Route::post('routes/create', [App\Http\Controllers\routeController::class, 'create'])->name('routes/create');
 });
 
 // Forgot Password

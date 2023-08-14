@@ -1,60 +1,67 @@
 @php 
-$sidebar = [
-            [
-                'is_parent' => 0,
-                'label' => 'Dashboard',
-                'route' => 'dashboard',
-                'icon' => 'nav-icon fas fa-tachometer-alt'
-            ],
-            [
-                'is_parent' => 0,
-                'label' => 'User',
-                'route' => 'users',
-                'icon' => 'nav-icon fas fa-user'
-            ],
-            [
-                'is_parent' => 0,
-                'label' => 'Route',
-                'route' => 'routes/index',
-                'icon' => 'nav-icon fa fa-route'
-            ],
-            [
-                'is_parent' => 1,
-                'label' => 'Email',
-                'route' => 'dashboard',
-                'icon' => 'nav-icon fa fa-envelope',
-                'children' => [
-                    [
-                        'label' => 'Compose',
-                        'route' => 'dashboard1',
-                    ],
-                    [
-                        'label' => 'Inbox',
-                        'route' => 'dashboard2'
-                    ],
-                    [
-                        'label' => 'Read',
-                        'route' => 'admin-login',
-                    ]
-                ]
-            ],
-            [
-                'is_parent' => 1,
-                'label' => 'Charts',
-                'route' => 'dashboard3',
-                'icon' => 'nav-icon fas fa-chart-pie',
-                'children' => [
-                    [
-                        'label' => 'Flot',
-                        'route' => 'dashboard4',
-                    ],
-                    [
-                        'label' => 'Moris',
-                        'route' => 'dashboard5',
-                    ]
-                ]
-            ]
-        ];
+// $sidebar = [
+//             [
+//                 'is_parent' => 0,
+//                 'label' => 'Dashboard',
+//                 'route' => 'dashboard',
+//                 'icon' => 'nav-icon fas fa-tachometer-alt'
+//             ],
+//             [
+//                 'is_parent' => 0,
+//                 'label' => 'User',
+//                 'route' => 'users',
+//                 'icon' => 'nav-icon fas fa-user'
+//             ],
+//             [
+//                 'is_parent' => 0,
+//                 'label' => 'Route',
+//                 'route' => 'routes/index',
+//                 'icon' => 'nav-icon fa fa-route'
+//             ],
+//             [
+//                 'is_parent' => 1,
+//                 'label' => 'Email',
+//                 'route' => 'dashboard',
+//                 'icon' => 'nav-icon fa fa-envelope',
+//                 'children' => [
+//                     [
+//                         'label' => 'Compose',
+//                         'route' => 'dashboard1',
+//                     ],
+//                     [
+//                         'label' => 'Inbox',
+//                         'route' => 'dashboard2'
+//                     ],
+//                     [
+//                         'label' => 'Read',
+//                         'route' => 'admin-login',
+//                     ]
+//                 ]
+//             ],
+//             [
+//                 'is_parent' => 1,
+//                 'label' => 'Charts',
+//                 'route' => 'dashboard3',
+//                 'icon' => 'nav-icon fas fa-chart-pie',
+//                 'children' => [
+//                     [
+//                         'label' => 'Flot',
+//                         'route' => 'dashboard4',
+//                     ],
+//                     [
+//                         'label' => 'Moris',
+//                         'route' => 'dashboard5',
+//                     ]
+//                 ]
+//             ]
+//         ];
+$sidebar = DB::table('routes')->get();
+foreach ($sidebar as $key => $route) {
+  if($route->is_parent == 1){
+    $child_routes = DB::table('children_routes')->where('parents_id', $route->id)->get();
+    $route->children = $child_routes;
+  }
+}
 @endphp
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background: #10263c;">
     <!-- Brand Logo -->
@@ -93,30 +100,30 @@ $sidebar = [
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           @foreach ($sidebar as $s_value)
-          @if($s_value['is_parent'] == 0)
+          @if($s_value->is_parent == 0)
           <li class="nav-item">
-            <a href="{{ route($s_value['route']) }}" class="nav-link {{ request()->routeIs($s_value['route']) ? 'active' : null }}">
-              <i class="{{ $s_value['icon'] }}"></i>
+            <a href="{{ url($s_value->route) }}" class="nav-link {{ request()->routeIs($s_value->route) ? 'active' : null }}">
+              <i class="{{ $s_value->icon }}"></i>
               <p>
-                {{ $s_value['label'] }}
+                {{ $s_value->label }}
               </p>
             </a>
           </li>
           @else
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="{{ $s_value['icon'] }}"></i>
+              <i class="{{ $s_value->icon }}"></i>
               <p>
-                {{ $s_value['label'] }}
+                {{ $s_value->label }}
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              @foreach ($s_value['children'] as $children)
+              @foreach ($s_value->children as $children)
                 <li class="nav-item">
-                  <a href="{{ route($children['route']) }}" class="nav-link">
+                  <a href="{{ url($children->route) }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>{{ $children['label'] }}</p>
+                    <p>{{ $children->label }}</p>
                   </a>
                 </li>
               @endforeach
