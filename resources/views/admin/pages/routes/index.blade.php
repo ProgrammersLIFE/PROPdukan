@@ -1,5 +1,10 @@
 @extends('admin.components.layout')
 @section('content')
+<style>
+  .hide{
+    display: none;
+  }
+</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -23,7 +28,10 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          
+          <div class="alert alert-success alert-block hide">
+            <button type="button" class="close" data-dismiss="alert">×</button>	
+                <strong class="message"></strong>
+          </div>
           <!-- /.card -->
 
           <div class="card">

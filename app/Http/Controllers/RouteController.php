@@ -127,4 +127,12 @@ class RouteController extends Controller
         return view("admin/pages/routes/create", compact('route', 'children_routes'));
     }
 
+    //delete
+    public function delete($id){
+        Route::find($id)->delete();
+        ChildrenRoutes::where('parents_id', $id)->delete();
+        return response()->json(['status' => 200, 'message' => 'Route Deleted
+         successfuly']);
+    }
+
 }
