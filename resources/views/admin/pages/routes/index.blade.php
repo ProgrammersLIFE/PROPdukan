@@ -36,15 +36,13 @@
                         <a href="{{ route('routes/create') }}" class="btn btn-primary">Add New</a>
                     </div>
                 </div>
-            </div>
+            </div> 
             <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Lable</th>
-                  <th>Route</th>
                   <th>Parent Label</th>
                   <th>Action</th>
                 </tr>

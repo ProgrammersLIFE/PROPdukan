@@ -59,7 +59,5 @@ addMore = () =>{
 
     $('#tbody').append(adddata);
 }
-getDelete=(id)=>{
-    alert('ojefkjk');
-}
+
 

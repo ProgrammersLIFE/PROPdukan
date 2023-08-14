@@ -33,7 +33,7 @@
                         <h3 class="card-title">View All Routes</h3>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="{{ route('routes/create') }}" class="btn btn-primary">Add New</a>
+                        <a href="{{ route('property/create') }}" class="btn btn-primary">Add New</a>
                     </div>
                 </div>
             </div>
@@ -43,9 +43,7 @@
                 <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Lable</th>
-                  <th>Route</th>
-                  <th>Parent Label</th>
+                  <th>Name</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -66,4 +64,4 @@
 </div>
 @endsection
 <script src="{{ url('/') }}/admin/plugins/jquery/jquery.min.js"></script>
-<script src="{{ url('/') }}/admin/js/route.js"></script>
+<script src="{{ url('/') }}/admin/js/category.js"></script>

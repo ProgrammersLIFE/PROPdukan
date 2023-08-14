@@ -37,9 +37,9 @@ Route::middleware('auth:admin')->group(function(){
     Route::post('routes/create', [App\Http\Controllers\routeController::class, 'create'])->name('routes/create');
     
     //property categories
-    Route::get('property-categories', [App\Http\Controllers\categoryController::class, 'index'])->name('property-categories');
-    Route::get('property-create', [App\Http\Controllers\categoryController::class, 'create'])->name('property-create');
-    Route::post('property-create', [App\Http\Controllers\categoryController::class, 'create'])->name('property-create');
+    Route::get('property/index', [App\Http\Controllers\categoryController::class, 'index'])->name('property/categories');
+    Route::get('property/create', [App\Http\Controllers\categoryController::class, 'create'])->name('property/create');
+    Route::post('property/create', [App\Http\Controllers\categoryController::class, 'create'])->name('property/create');
 });
 
 // Forgot Password

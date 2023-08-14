@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
-class ChildrenRoutes extends Model
+class PropertyCategory extends Model
 {
     use HasFactory;
-    protected $table= "children_routes";
+    protected $table= "property_categories";
     protected $guarded;
 
-    public function getRoutes(){
-        return DB::table('routes')->get();
+    public function getCategories(){
+        return DB::table('property_categories')->get();
     }
 }

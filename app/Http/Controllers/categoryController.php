@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\admin;
-use App\Models\PropertyCategorie;
+use App\Models\PropertyCategory;
 use DataTables;
 use Session;
 use Auth;
@@ -16,7 +16,45 @@ use Redirect;
 
 class categoryController extends Controller
 {
-    public function index(){
-        return 'jkdfkn';
+
+    public $Property_Category;
+    public function __construct()
+    {
+        $this->Property_Category = new PropertyCategory();
     }
+    public function index(request $request){
+        if ($request->ajax()) {
+            $data = $this->Property_Category->getCategories();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+       
+                            $btn = '<a href="#" class="edit btn btn-primary btn-sm">
+                                <i class="fa-solid fa-solid fa fa-edit"></i>
+                            </a>
+                            <a onclick="#" class="btn btn-danger btn-sm">
+                                <i class="fa-solid fa-solid fa fa-trash"></i>
+                            </a>';
+      
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        return view('admin/pages/categories/index');
+    }
+
+    public function create(request $request){
+        if($request->isMethod('post')){
+            $category = [
+                'name' => $request->name,
+            ];
+
+            PropertyCategory::create($category);
+            return response()->json(['status' => 200, 'message' => 'Category created successfuly']);
+        }
+         return view('admin/pages/categories/create');
+        
+    }
+
 }
