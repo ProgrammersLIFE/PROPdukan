@@ -128,7 +128,11 @@ class RouteController extends Controller
 
     //delete
     public function delete($id){
-        return $id;
+        Route::find($id)->delete();
+        ChildrenRoutes::where('parents_id', $id)->delete();
+        return response()->json(['status' => 200, 'message' => 'Route Deleted
+         successfuly']);
+
     }
 
 }
