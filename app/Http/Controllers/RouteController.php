@@ -67,7 +67,7 @@ class RouteController extends Controller
             if(isset($request->data)){
                 foreach($request->data as $key => $value){
                     $data = [
-                        "parents_id" => $routes->id,
+                        "parents_id" => !isset($value['child_id']) ? $routes->id : $request->input('id'),
                         "label" => $value['label'],
                         "route" => $value['route'],
                         "is_active" => 1,
@@ -85,22 +85,19 @@ class RouteController extends Controller
 
         // This section is for edit page
         if($request->input('id')){
-            $children_route = ChildrenRoutes::find($request->input('id'));
-            $route =  Route::find($children_route->parents_id);
+            $children_routes = ChildrenRoutes::where('parents_id', $request->input('id'))->get();
+            $route =  Route::find($request->input('id'));
             $selected['id'] = $route->id;
             $selected['label'] = $route->label;
             $selected['icon'] = $route->icon;
             $selected['route'] = $route->route;
             $selected['is_parents'] = $route->is_parent;
-
-            $children_routes = ChildrenRoutes::where('parents_id', $children_route->parents_id)->get();
         }
         return view("admin/pages/routes/create", compact('selected', 'children_routes'));
     }
 
     public function edit($id, Request $request){
         if($request->isMethod('post')){
-            return $request->all();
             $route = [
                 "label" => $request->label,
                 "icon" => $request->icon,
