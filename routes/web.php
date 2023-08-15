@@ -36,6 +36,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('routes/index', [App\Http\Controllers\routeController::class, 'index'])->name('routes/index');
     Route::get('routes/create', [App\Http\Controllers\routeController::class, 'create'])->name('routes/create');
     Route::post('routes/create', [App\Http\Controllers\routeController::class, 'create'])->name('routes/create');
+    Route::get('routes/delete/{id}', [App\Http\Controllers\routeController::class, 'delete'])->name('routes/delete');
     
     //property categories
     Route::get('property/index', [App\Http\Controllers\categoryController::class, 'index'])->name('property/categories');
@@ -43,7 +44,10 @@ Route::middleware('auth:admin')->group(function(){
     Route::post('property/create', [App\Http\Controllers\categoryController::class, 'create'])->name('property/create');
     Route::get('property/delete/{id}', [App\Http\Controllers\categoryController::class, 'delete'])->name('property/delete/{id}');
     Route::get('routes/delete/{id}', [App\Http\Controllers\routeController::class, 'delete'])->name('routes/delete');
+    //properties
+    Route::get('properties/create', [App\Http\Controllers\propertiesController::class, 'create'])->name('properties/create');
     //User
+    Route::get('users/index', [App\Http\Controllers\userController::class, 'index'])->name('users/index');
     Route::get('users/create', [App\Http\Controllers\userController::class, 'create'])->name('users/create');
     Route::post('users/create', [App\Http\Controllers\userController::class, 'create'])->name('users/create');
 

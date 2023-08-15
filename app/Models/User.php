@@ -7,12 +7,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use DB;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $table= "users";
     protected $guarded;
+
+    public function getUsers(){
+        return DB::table('users')->get();
+    }
 
     /**
      * The attributes that are mass assignable.
