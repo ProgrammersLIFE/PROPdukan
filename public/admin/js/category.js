@@ -8,23 +8,27 @@ $(function () {
        "columns": [
             {data: 'id', name: 'id'},
             {data: 'name', name: 'name'},
+            {data: 'type', name: 'type'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
  
-    // getDelete = ($id) => {
-    //   var conf = confirm('Are You Sure?');
-    //       if(!conf){
-    //           return false;
-    //       }
+  proptyDelete = ($id) => {
+    var conf = confirm('Are You Sure?');
+        if(!conf){
+            return false;
+        }
 
-    //       $.ajax({
-    //         type: "get",
-    //         url: "{{ route('routes/delete)}}/" + $id,
-    //         dataType: "dataType",
-    //         success: function (response) {
-    //           console.log(response);
-    //         }
-    //       });
-    // }
+        $.ajax({
+          type: "get",
+          url:"delete/" + $id,
+          success: function (response) {
+            if(response.status == 200){
+              $('.alert-success').removeClass('hide');
+              $('.message').text(response.message);
+            }
+          }
+        });
+        
+    }

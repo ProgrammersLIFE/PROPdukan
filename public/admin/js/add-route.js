@@ -59,8 +59,5 @@ addMore = () =>{
 
     $('#tbody').append(adddata);
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> a49c89926d804097173f4f1c09d878c7fa829cd5
 

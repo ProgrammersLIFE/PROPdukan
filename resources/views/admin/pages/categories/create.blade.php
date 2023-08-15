@@ -15,8 +15,8 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Add Routes</li>
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+            <li class="breadcrumb-item active">Add Category</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -46,7 +46,19 @@
               <div class="card-body">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Property category Name</label>
-                  <input type="text" class="form-control"  name="name" placeholder="Enter Property name">
+                  
+                  <input type="hidden" class="form-control" value="{{ $selected['id'] }}" name="id">
+                  
+                  <input type="text" placeholder="Enter Property category Name" class="form-control"  name="name" value="{{ $selected['name']}}" >
+                  
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Type</label>
+                  <select class="form-control" name="type" id="">
+                    <option value="">Select</option>
+                    <option {{ $selected['type'] == 1 ? 'selected' : '' }} value="1">Rsesidential</option>
+                    <option {{ $selected['type'] == 2 ? 'selected' : '' }} value="2">Commercial</option>
+                  </select>
                 </div> 
               </div>
               <!-- /.card-body -->
