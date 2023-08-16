@@ -10,8 +10,8 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">View All Routes</li>
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+            <li class="breadcrumb-item active">View categories</li>
           </ol>
         </div>
       </div>
@@ -30,7 +30,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h3 class="card-title">View All Routes</h3>
+                        <h3 class="card-title">View All Categoriess</h3>
                     </div>
                     <div class="col-md-6 text-right">
                         <a href="{{ route('property/create') }}" class="btn btn-primary">Add New</a>
@@ -44,6 +44,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
+                  <th>Type</th>
                   <th>Action</th>
                 </tr>
                 </thead>

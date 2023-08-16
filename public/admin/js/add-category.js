@@ -17,7 +17,7 @@ $(document).ready(function () {
             cache: false,
             processData: false,
             success: function (response) {
-                console.log(response);
+                // console.log(response);
                 if(response.status == 200){
                     $('.alert-success').removeClass('hide');
                     $('.message').text(response.message);

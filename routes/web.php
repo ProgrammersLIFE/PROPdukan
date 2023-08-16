@@ -42,6 +42,8 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('property/index', [App\Http\Controllers\categoryController::class, 'index'])->name('property/categories');
     Route::get('property/create', [App\Http\Controllers\categoryController::class, 'create'])->name('property/create');
     Route::post('property/create', [App\Http\Controllers\categoryController::class, 'create'])->name('property/create');
+    Route::get('property/delete/{id}', [App\Http\Controllers\categoryController::class, 'delete'])->name('property/delete/{id}');
+    Route::get('routes/delete/{id}', [App\Http\Controllers\routeController::class, 'delete'])->name('routes/delete');
     //properties
     Route::get('properties/create', [App\Http\Controllers\propertiesController::class, 'create'])->name('properties/create');
     //User

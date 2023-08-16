@@ -17,6 +17,8 @@ use Redirect;
 class categoryController extends Controller
 {
 
+    //for view Properties...
+
     public $Property_Category;
     public function __construct()
     {
@@ -29,10 +31,10 @@ class categoryController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        
-                            $btn = '<a href="#" class="edit btn btn-primary btn-sm">
+                            $btn = '<a href="'.url("property/create?id=$row->id").'" class="edit btn btn-primary btn-sm">
                                 <i class="fa-solid fa-solid fa fa-edit"></i>
                             </a>
-                            <a onclick="#" class="btn btn-danger btn-sm">
+                            <a onclick="proptyDelete('. $row->id .')" class="btn btn-danger btn-sm">
                                 <i class="fa-solid fa-solid fa fa-trash"></i>
                             </a>';
       
@@ -44,17 +46,47 @@ class categoryController extends Controller
         return view('admin/pages/categories/index');
     }
 
+    // is for create $ update 
     public function create(request $request){
+        $selected = [
+            'id' => null,
+            'name' => null,
+            'type' => null,
+        ];
         if($request->isMethod('post')){
             $category = [
                 'name' => $request->name,
+                'type' => $request->type,
             ];
 
-            PropertyCategory::create($category);
-            return response()->json(['status' => 200, 'message' => 'Category created successfuly']);
+            if($request->input('id') > 0){
+                $message = "Updated";
+                PropertyCategory::find($request->input('id'))->update($category);
+            }else{
+                $message = "Created";
+                PropertyCategory::create($category);
+            }
+
+            
+            return response()->json(['status' => 200, 'message' => 'Category '. $message.' successfuly']);
         }
-         return view('admin/pages/categories/create');
-        
+         // This section is for edit page
+         if($request->input('id')){
+            $categories_val = PropertyCategory::find($request->input('id'));
+
+            $selected['id'] = $categories_val->id;
+            $selected['name'] = $categories_val->name;
+            $selected['type'] = $categories_val->type;
+
+        }
+         return view('admin/pages/categories/create', compact('selected'));
+
     }
 
+     //delete
+     public function delete($id){
+        PropertyCategory::find($id)->delete();
+        return response()->json(['status' => 200, 'message' => 'Category Deleted
+         successfuly']);
+    }
 }
