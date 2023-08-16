@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>AdminLTE 3 | DataTables</title>
-
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ url('/') }}/admin/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="{{ url('/') }}/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -72,3 +74,15 @@
 <!-- Page specific script -->
 </body>
 </html>
+
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+  })
+  </script>
