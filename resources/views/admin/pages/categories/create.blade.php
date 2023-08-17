@@ -56,7 +56,7 @@
                   <label for="exampleInputPassword1">Type</label>
                   <select class="form-control" name="type" id="">
                     <option value="">Select</option>
-                    <option {{ $selected['type'] == 1 ? 'selected' : '' }} value="1">Rsesidential</option>
+                    <option {{ $selected['type'] == 1 ? 'selected' : '' }} value="1">Residential</option>
                     <option {{ $selected['type'] == 2 ? 'selected' : '' }} value="2">Commercial</option>
                   </select>
                 </div> 

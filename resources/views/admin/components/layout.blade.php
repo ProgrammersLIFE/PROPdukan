@@ -63,6 +63,9 @@
 <script src="{{ url('/') }}/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="{{ url('/') }}/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="{{ url('/') }}/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+ <!-- Select2 -->
+ <link rel="stylesheet" href="{{ url('/') }}/plugins/select2/css/select2.min.css">
+ <link rel="stylesheet" href="{{ url('/') }}//plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 <!-- AdminLTE App -->
 <script src="{{ url('/') }}/admin/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
