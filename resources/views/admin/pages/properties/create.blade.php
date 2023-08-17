@@ -528,7 +528,7 @@
                           <div class="form-group">
                             <label for="exampleInputPassword1">Amenities</label>
                             <div class="select2-primary">
-                              <select class="select2"  multiple="multiple" data-placeholder="Select Other Amenities" data-dropdown-css-class="select2-primary" style="width: 100%;">
+                              <select class="select2 form-control"  multiple="multiple" data-placeholder="Select Other Amenities" data-dropdown-css-class="select2-primary" style="width: 100%;">
                                 <option>Select</option>
                                 <option>Park</option>
                                 <option>Maintanance Staff</option>

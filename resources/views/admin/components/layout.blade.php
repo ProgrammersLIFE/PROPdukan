@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>AdminLTE 3 | DataTables</title>
-
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -18,6 +17,10 @@
   <link rel="stylesheet" href="{{ url('/') }}/admin/dist/css/adminlte.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="{{ url('/') }}/admin/plugins/toastr/toastr.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ url('/') }}/admin/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="{{ url('/') }}/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -50,6 +53,8 @@
 <script src="{{ url('/') }}/admin/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ url('/') }}/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="{{ url('/') }}/admin/plugins/select2/js/select2.full.min.js"></script>
 <!-- DataTables  & Plugins -->
 <script src="{{ url('/') }}/admin/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="{{ url('/') }}/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -75,3 +80,15 @@
 <!-- Page specific script -->
 </body>
 </html>
+<script>
+  $(function(){
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+  })
+</script>
+
