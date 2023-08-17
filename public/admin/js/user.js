@@ -13,3 +13,24 @@ $(function () {
         ]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 });
+
+userDelete = ($id) => {
+    var conf = confirm('Are You Sure?');
+        if(!conf){
+            return false;
+        }
+
+        $.ajax({
+          type: "get",
+          url: "delete/" + $id,
+          success: function (response) {
+            if(response.status == 200){
+              $('.alert-success').removeClass('hide');
+              $('.message').text(response.message);
+            }
+          }
+        });
+        $(document).on('click', '.close', function(){
+          location.reload();
+        });
+  }

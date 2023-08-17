@@ -19,10 +19,10 @@ class userController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        
-                            $btn = '<a href="#" class="edit btn btn-primary btn-sm">
+                            $btn = '<a href="'.url("users/create?id=$row->id").'" class="edit btn btn-primary btn-sm">
                                 <i class="fa-solid fa-solid fa fa-edit"></i>
                             </a>
-                            <a onclick="#" class="btn btn-danger btn-sm">
+                            <a onclick="userDelete('. $row->id .')" class="btn btn-danger btn-sm">
                                 <i class="fa-solid fa-solid fa fa-trash"></i>
                             </a>';
       
@@ -47,11 +47,36 @@ class userController extends Controller
             $user = [
                 "name" => $request->name,
                 "email" => $request->email,
-                "password" => $request->password
+                "password" =>bcrypt($request->password)
             ];
-            User::create($user);
-            return response()->json(['status' => 200, 'message' => 'User created successfuly']);
+
+            if($request->input('id') > 0){
+                $message = "Updated";
+                User::find($request->input('id'))->update($user);
+            }else{
+                $message = "Created";
+                User::create($user);
+            }
+
+            return response()->json(['status' => 200, 'message' => 'User '.$message.' successfuly']);
         }
-        return view("admin/pages/users/create");
+        if($request->input('id')){
+            $user_val = User::find($request->input('id'));
+
+            $selected['id'] = $user_val->id;
+            $selected['name'] = $user_val->name;
+            $selected['email'] = $user_val->email;
+            $selected['password'] = $user_val->password;
+
+        }
+        return view("admin/pages/users/create",compact('selected'));
     }
+
+     //delete
+     public function delete($id){
+        User::find($id)->delete();
+        return response()->json(['status' => 200, 'message' => 'User Deleted
+         successfuly']);
+    }
+
 }
