@@ -44,9 +44,55 @@
             <form id="form" data-action="{{ url('properties/create')}}">
               @csrf
               <div class="card-body" id="accordion">
+
                 <div class="card card-secondary">
                   <div class="card-header">
-                    <h6 class="card-title w-100">
+                    <h6 class="card-title w-100"> 
+                      <a class="d-block w-100" data-toggle="collapse" href="#collapseZero">
+                        Sell or rent your property
+                      </a>
+                    </h6>
+                  </div>
+                  <div id="collapseZero" class="collapse show" data-parent="#accordion">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">I'm looking to</label>
+                            <select id="property_type" name="property_type" class="form-control "> 
+                              <option>Select</option>
+                              <option value="sell">Sell</option>
+                              <option value="rent">Rent/Lease</option>
+                              <option class="pg" value="pg">PG</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">What kind of property do you have?</label><br>
+                            <input type="radio" name="residential" value="residential" checked placeholder="Enter Name">
+                            <label for="exampleInputPassword1">Residential</label>
+
+                            <input type="radio" name="residential" class="commertial" style="margin-left: 40px;" value="commercial" placeholder="Enter Name">
+                            <label for="exampleInputPassword1" class="commertial">Commercial</label>
+                          </div>
+                        <div class="col-md-12">
+                          <select id="property_type" name="property_type" class="form-control "> 
+                            <option>Select</option>
+                            <option value="">Flate</option>
+                            <option value="">Famhouse</option>
+                            <option value="">Plot/Land</option>
+                          </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card card-secondary">
+                  <div class="card-header">
+                    <h6 class="card-title w-100"> 
                       <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
                         Where is your property located?
                       </a>
@@ -70,8 +116,13 @@
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
-                            <label for="exampleInputPassword1">Apartment/society</label>
-                            <input type="eamil" class="form-control" name="email" placeholder="Enter your email">
+                            <label for="exampleInputPassword1">Located inside</label>
+                            <select id="property_type" name="property_type" class="form-control "> 
+                              <option>Select</option>
+                              <option value="">It Park</option>
+                              <option value="">Business Park</option>
+                              <option value="">Other</option>
+                            </select>
                           </div>
                         </div>
                         <div class="col-md-4">
@@ -92,16 +143,36 @@
                             <input type="password" class="form-control" name="password" placeholder="Enter password">
                           </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <div class="form-group">
                             <label for="exampleInputPassword1">House No(Optional)</label>
                             <input type="number" class="form-control" name="password" placeholder="Enter password">
                           </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <div class="form-group">
                             <label for="exampleInputPassword1">Address(Optional)</label>
                             <input type="eamil" class="form-control" name="email" placeholder="Enter your email">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Zone Type</label>
+                            <select id="property_type" name="property_type" class="form-control "> 
+                              <option>Select</option>
+                              <option>Industrial</option>
+                              <option>Commercial</option>
+                              <option>Residential</option>
+                              <option>Transport and Communication</option>
+                              <option>Public Utilities</option>
+                              <option>Public and Semi Public Use</option>
+                              <option>Open Spaces</option>
+                              <option>Agriculture Zone</option>
+                              <option>Special Economic Zone</option>
+                              <option>Natural Conservation Zone</option>
+                              <option>Government Use</option>
+                              <option>Other</option>
+                            </select>
                           </div>
                         </div>
                       </div>
@@ -755,7 +826,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Continue</button>
               </div>
             </form>
           </div>
@@ -771,4 +842,4 @@
 </div>
 @endsection
 <script src="{{ url('/') }}/admin/plugins/jquery/jquery.min.js"></script>
-<script src="{{ url('/') }}/admin/js/add-user.js"></script>
+<script src="{{ url('/') }}/admin/js/add-properties.js"></script>
