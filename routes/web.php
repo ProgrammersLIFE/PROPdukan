@@ -50,6 +50,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('users/index', [App\Http\Controllers\userController::class, 'index'])->name('users/index');
     Route::get('users/create', [App\Http\Controllers\userController::class, 'create'])->name('users/create');
     Route::post('users/create', [App\Http\Controllers\userController::class, 'create'])->name('users/create');
+    Route::get('users/delete/{id}', [App\Http\Controllers\userController::class, 'delete'])->name('users/delete/{id}');
 
 });
 
