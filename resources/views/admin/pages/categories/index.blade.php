@@ -1,4 +1,9 @@
 @extends('admin.components.layout')
+<style>
+  .hide{
+    display: none;
+  }
+</style>
 @section('content')
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -14,6 +19,11 @@
             <li class="breadcrumb-item active">View categories</li>
           </ol>
         </div>
+        <div class="col-md-12">
+          <div class="alert alert-success alert-block hide">
+              <button type="button" class="close" data-dismiss="alert">×</button>	
+                  <strong class="message"></strong>
+          </div>
       </div>
     </div><!-- /.container-fluid -->
   </section>

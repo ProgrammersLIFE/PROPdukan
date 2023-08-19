@@ -65,7 +65,7 @@
                 <table id="myTable" class="table table-bordered {{ $selected['is_parents'] == 1 ? '' : 'hide' }} mt-4">
                   <thead>
                     <tr>
-                      <th>Sl No.</th>
+                      <th>Sl No</th>
                       <th>Label</th>
                       <th>Route</th>
                       <th>

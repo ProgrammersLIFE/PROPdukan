@@ -19,6 +19,12 @@
             <li class="breadcrumb-item active">View All Routes</li>
           </ol>
         </div>
+        <div class="col-md-12">
+          <div class="alert alert-success alert-block hide">
+              <button type="button" class="close" data-dismiss="alert">×</button>	
+                  <strong class="message"></strong>
+          </div>
+      </div>
       </div>
     </div><!-- /.container-fluid -->
   </section>

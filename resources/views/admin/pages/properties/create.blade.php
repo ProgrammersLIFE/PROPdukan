@@ -3,7 +3,11 @@
   .hide{
     display: none;
   }
+.phide{
+  display: none;
+}
 </style>
+
 @section('content')
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -59,8 +63,8 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label for="exampleInputPassword1">I'm looking to</label>
-                            <select id="property_type" name="property_type" class="form-control "> 
-                              <option>Select</option>
+                            <select id="property_type" required name="property_type" class="form-control "> 
+                              <option value="">Select</option>
                               <option value="sell">Sell</option>
                               <option value="rent">Rent/Lease</option>
                               <option class="pg" value="pg">PG</option>
@@ -70,21 +74,37 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label for="exampleInputPassword1">What kind of property do you have?</label><br>
-                            <input type="radio" name="residential" value="residential" checked placeholder="Enter Name">
+                            <input type="radio" name="residential" class="residential" value="residential" checked >
                             <label for="exampleInputPassword1">Residential</label>
 
-                            <input type="radio" name="residential" class="commertial" style="margin-left: 40px;" value="commercial" placeholder="Enter Name">
-                            <label for="exampleInputPassword1" class="commertial">Commercial</label>
+                            <input type="radio" name="residential" class="commercial" style="margin-left: 40px;" value="commercial" placeholder="Enter Name">
+                            <label for="exampleInputPassword1" class="commercial">Commercial</label>
                           </div>
+                          
                         <div class="col-md-12">
-                          <select id="property_type" name="property_type" class="form-control "> 
-                            <option>Select</option>
-                            <option value="">Flate</option>
-                            <option value="">Famhouse</option>
-                            <option value="">Plot/Land</option>
+                          <div class="form-group">
+                          <select id="properties_type" name="properties_type" class="form-control properties_type"> 
+                            <option value="">Select</option>
+                            <option value="1">Flate</option>
+                            <option value="2">Famhouse</option>
+                            <option value="3">Plot/Land</option>
                           </select>
                           </div>
                         </div>
+                        </div>
+
+                        <div class="col-md-12" >
+                          <div class="form-group hide" id="comtype">
+                          <label for="">What kind of ?</label>
+                          <select id="property_type" name="com" class="form-control "> 
+                            <option>Select</option>
+                            <option value="">#</option>
+                            <option value="">#</option>
+                            <option value="">#</option>
+                          </select>
+                          </div>
+                        </div>
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -98,24 +118,24 @@
                       </a>
                     </h6>
                   </div>
-                  <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                  <div id="collapseOne"  id="" class="collapse show  plocated hide" data-parent="#accordion">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="exampleInputEmail1">City</label>
                             <input type="hidden" class="form-control" name="id">
-                            <input type="text" class="form-control" name="name" placeholder="Enter Name">
+                            <input type="text" class="form-control" name="name" placeholder="Enter Your City name">
                           </div>
                         </div>
                         <div class="col-md-4">
-                          <div class="form-group">
+                          <div class="form-group commercialtype phide">
                             <label for="exampleInputPassword1">Apartment/society</label>
-                            <input type="eamil" class="form-control" name="email" placeholder="Enter your email">
+                            <input type="eamil" class="form-control" name="email" placeholder="Enter your Apartment/society Name">
                           </div>
                         </div>
                         <div class="col-md-4">
-                          <div class="form-group">
+                          <div class="form-group commercialtype phide">
                             <label for="exampleInputPassword1">Located inside</label>
                             <select id="property_type" name="property_type" class="form-control "> 
                               <option>Select</option>
@@ -128,35 +148,35 @@
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="exampleInputPassword1">Locality</label>
-                            <input type="password" class="form-control" name="password" placeholder="Enter password">
+                            <input type="password" class="form-control" name="password" placeholder="Enter Locality">
                           </div>
                         </div>
                         <div class="col-md-4 commercial">
-                          <div class="form-group">
+                          <div class="form-group commercialtype phide">
                             <label for="exampleInputPassword1">Project(Optional)</label>
-                            <input type="password" class="form-control" name="password" placeholder="Enter password">
+                            <input type="password" class="form-control" name="password" placeholder="Project">
                           </div>
                         </div>
                         <div class="col-md-4">
-                          <div class="form-group">
+                          <div class="form-group commercialtype phide">
                             <label for="exampleInputPassword1">Sub-Locality(Optional)</label>
-                            <input type="password" class="form-control" name="password" placeholder="Enter password">
+                            <input type="password" class="form-control" name="password" placeholder="Sub-Locality">
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="exampleInputPassword1">House No(Optional)</label>
-                            <input type="number" class="form-control" name="password" placeholder="Enter password">
+                            <input type="number" class="form-control" name="password" placeholder="House No">
                           </div>
                         </div>
                         <div class="col-md-4">
-                          <div class="form-group">
+                          <div class="form-group commercialtype phide">
                             <label for="exampleInputPassword1">Address(Optional)</label>
-                            <input type="eamil" class="form-control" name="email" placeholder="Enter your email">
+                            <input type="eamil" class="form-control" name="email" placeholder="Address">
                           </div>
                         </div>
                         <div class="col-md-4">
-                          <div class="form-group">
+                          <div class="form-group commercialtype phide">
                             <label for="exampleInputPassword1">Zone Type</label>
                             <select id="property_type" name="property_type" class="form-control "> 
                               <option>Select</option>
@@ -172,7 +192,7 @@
                               <option>Natural Conservation Zone</option>
                               <option>Government Use</option>
                               <option>Other</option>
-                            </select>
+                            </select> 
                           </div>
                         </div>
                       </div>
@@ -241,7 +261,7 @@
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
-                                        <option>4</option>
+                                        <option>More than 3</option>
                                       </select>
                                     </div>
                                   </div>
@@ -315,7 +335,7 @@
                                   <div class="form-group">
                                     <label for="exampleInputPassword1">Floor Details</label>
                                     <h6>Total no of floor details</h6>
-                                    <input type="number" class="form-control " name="password" placeholder="Built-up Area">
+                                    <input type="number" class="form-control " name="" >
                                     <select class="form-control mt-3">
                                       <option>Basement</option>
                                       <option>Lower ground</option>
@@ -326,7 +346,7 @@
                                 <div class="col-md-6">
                                   <div class="form-group">
                                     <label for="exampleInputPassword1">Floors Allowed For Construction</label>
-                                    <input type="number" class="form-control" name="password" placeholder="No. of floors">
+                                    <input type="number" class="form-control" name="" placeholder="No. of floors">
                                   </div>
                                 </div>
                                 <div class="col-md-6">
@@ -361,17 +381,17 @@
                                   </div>
                                 </div>
                                 <div class="col-md-12">
-                                  <div class="form-group">
+                                  <div class="form-group ">
                                     <label for="exampleInputPassword1">Availability Status</label>
-                                    <select class="form-control">
+                                    <select class="form-control availability  ">
                                       <option>Select</option>
-                                      <option>Ready to move</option>
-                                      <option>under construction</option>
+                                      <option value="Ready to move">Ready to move</option>
+                                      <option value="under construction">under construction</option>
                                     </select>
                                   </div>
                                 </div>
                                 <div class="col-md-6">
-                                  <div class="form-group">
+                                  <div class="form-group Age hide">
                                     <label for="exampleInputPassword1">Age of property</label>
                                     <select class="form-control">
                                       <option>Select</option>
@@ -383,7 +403,7 @@
                                   </div>
                                 </div>
                                 <div class="col-md-6">
-                                  <div class="form-group">
+                                  <div class="form-group Possession hide ">
                                     <label for="exampleInputPassword1">Possession By</label>
                                     <select class="form-control">
                                       <option>Select</option>
@@ -396,7 +416,7 @@
                                 </div>
                                 <div class="col-md-6">
                                   <div class="form-group">
-                                    <label for="exampleInputPassword1">Avaiable from</label>
+                                    <label for="exampleInputPassword1">Available from</label>
                                     <input type="date" class="form-control" name="" placeholder="Enter Name">
                                   </div>
                                 </div>
