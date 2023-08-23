@@ -45,7 +45,10 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('property/delete/{id}', [App\Http\Controllers\categoryController::class, 'delete'])->name('property/delete/{id}');
     Route::get('routes/delete/{id}', [App\Http\Controllers\routeController::class, 'delete'])->name('routes/delete');
     //properties
+    Route::get('properties/index', [App\Http\Controllers\propertiesController::class, 'index'])->name('properties/create');
     Route::get('properties/create', [App\Http\Controllers\propertiesController::class, 'create'])->name('properties/create');
+    Route::post('properties/create', [App\Http\Controllers\propertiesController::class, 'create'])->name('properties/create');
+    Route::get('properties/delete/{id}', [App\Http\Controllers\propertiesController::class, 'delete'])->name('properties/delete/{id}');
     //User
     Route::get('users/index', [App\Http\Controllers\userController::class, 'index'])->name('users/index');
     Route::get('users/create', [App\Http\Controllers\userController::class, 'create'])->name('users/create');
