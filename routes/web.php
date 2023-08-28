@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\profileController;
+use App\Http\Controllers\googleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +53,11 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('users/create', [App\Http\Controllers\userController::class, 'create'])->name('users/create');
     Route::post('users/create', [App\Http\Controllers\userController::class, 'create'])->name('users/create');
     Route::get('users/delete/{id}', [App\Http\Controllers\userController::class, 'delete'])->name('users/delete/{id}');
+    //Profile
+    Route::get('profile/index', [App\Http\Controllers\profileController::class, 'index'])->name('profile/index');
+    Route::get('profile/create', [App\Http\Controllers\profileController::class, 'create'])->name('profile/create');
+    Route::post('profile/create', [App\Http\Controllers\profileController::class, 'create'])->name('profile/create');
+
 
 });
 
@@ -59,5 +66,18 @@ Route::get('forgot-password', [adminController::class, 'forgotPassword'])->name(
 Route::post('forgot-password', [adminController::class, 'forgotPasswordSubmit'])->name('forgot-password');
 Route::get('reset-password/{token}', [adminController::class, 'resetPassword'])->name('reset-password/{token}');
 Route::post('reset-password/{id}', [adminController::class, 'upatePassword'])->name('reset-password');
+
+//Frontend
+Route::get('home',[App\Http\Controllers\homeController::class,'home'])->name('home');
+
+//Login
+Route::get('admin-login',[App\Http\Controllers\homeController::class,'login'])->name('admin-login');
+// Route::post('admin-login',[App\Http\Controllers\homeController::class,'adminSubmit'])->name('admin-login');
+//Register
+Route::post('register',[App\Http\Controllers\homeController::class,'register'])->name('register');
+
+//google login
+Route::get('google-login',[App\Http\Controllers\googleController::class,'loginwithGoogle'])->name('google-login');
+Route::any('google-login-callback',[App\Http\Controllers\googleController::class,'callbackFromGoogle'])->name('google-login-callback');
 
 
