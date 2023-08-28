@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    var url = $(this).attr('data-action');
+
     $('#form').submit(function (e) { 
         e.preventDefault(); 
         var url = $(this).attr('data-action');
@@ -20,11 +22,13 @@ $(document).ready(function () {
                 if(response.status == 200){
                     $('.alert-success').removeClass('hide');
                     $('.message').text(response.message);
+                        getcat();
+
                 }
             }
         }); 
     });
-    
+
     $(document).on('click', '.close', function(){
         location.reload();
     });
@@ -44,11 +48,9 @@ $(document).ready(function () {
 
     $('.commercial').click(function(){
         if($(this).is(':checked') == 1){
-        //   var type =  $(this).val();
             $('.lease_ty').removeClass('hide');
             $('#comtype').removeClass('hide');
             $('.commercialtype').removeClass('phide');
-            // console.log(type);
 
         }
     })
@@ -60,14 +62,28 @@ $(document).ready(function () {
             $('#comtype').addClass('hide');
             $('.commercialtype').addClass('phide');
             $('.lease_ty').addClass('hide');
-            console.log(type);
+            // console.log(type);
 
         }else{
             $('#comtype').removeClass('hide');
             $('.commercialtype').removeClass('phide')
         }
     })
-    
+
+    $('.change-type').click(function(){
+        let id = $(this).val();
+        $.ajax({
+            type: "get",
+            url:"ptype",
+            data: {p_type:id},
+            dataType: 'JSON',
+            success: function (response) {
+                // console.log(response.data);
+                $('.properties_type').html(response.data);
+            }
+        });
+    });
+
     $('.properties_type').change(function (e) { 
         e.preventDefault();
         var properties_type = $('#properties_type').val();

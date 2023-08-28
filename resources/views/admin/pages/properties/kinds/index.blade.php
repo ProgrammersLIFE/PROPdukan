@@ -16,7 +16,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">View properties</li>
+            <li class="breadcrumb-item active">View categories</li>
           </ol>
         </div>
         <div class="col-md-12">
@@ -40,10 +40,10 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h3 class="card-title">View All Poperties</h3>
+                        <h3 class="card-title">View  kinds</h3>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="{{ route('properties/create') }}" class="btn btn-primary">Add New</a>
+                        <a href="{{ route('kind/create') }}" class="btn btn-primary">Add New</a>
                     </div>
                 </div>
             </div>
@@ -53,9 +53,8 @@
                 <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Property type</th>
-                  <th>City</th>
-                  <th>kind of Properties</th>
+                  <th>kind</th>
+                  <th>kind Type</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -76,4 +75,4 @@
 </div>
 @endsection
 <script src="{{ url('/') }}/admin/plugins/jquery/jquery.min.js"></script>
-<script src="{{ url('/') }}/admin/js/properties.js"></script>
+<script src="{{ url('/') }}/admin/js/kind.js"></script>

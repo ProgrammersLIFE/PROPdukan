@@ -25,11 +25,14 @@ class propertiesController extends Controller
             $data = $this->Properties->getProperties();
             // return $data;
             return DataTables::of($data)
+            ->editColumn('property_cat', function ($row) {
+                return  $row->property_cat == 1 ? 'Residential' : 'Commercial';
+            })
                     ->addIndexColumn()
                    
                     ->addColumn('action', function($row){
        
-                            $btn = '<a href="'.url("properties/create?id=$row->id").'" class="edit btn btn-primary btn-sm">
+                            $btn = '<a href="'.url("properties/create?id=$row->id").'"  class="edit btn btn-primary btn-sm">
                                 <i class="fa-solid fa-solid fa fa-edit"></i>
                             </a>
                             <a onclick="propertyDelete('.$row->id.')" class="btn btn-danger btn-sm">
@@ -45,6 +48,7 @@ class propertiesController extends Controller
     }
 
     public function create(request $request){
+        // return $request->p_id;
         // $categories_val = PropertyCategory::where('type', 1)->get();
         // return $categories_val;
 
@@ -162,7 +166,7 @@ class propertiesController extends Controller
             $selected['open_sides']=$properties_val->open_sides;
             $selected['any_construction']=$properties_val->any_construction;
             $selected['availability_status']=$properties_val->availability_status;
-            $selected['iage_of_propertyd']=$properties_val->age_of_property;
+            $selected['age_of_propertyd']=$properties_val->age_of_property;
             $selected['possession']=$properties_val->possession;
             $selected['available_date']=$properties_val->available_date;
             $selected['Willing']=$properties_val->Willing;
@@ -199,6 +203,7 @@ class propertiesController extends Controller
             $selected['property_suggest']=$properties_val->property_suggest;
             $selected['apartment_society']=$properties_val->apartment_society;
             $selected['Located_inside']=$properties_val->Located_inside;
+            $selected['floors_allowed']=$properties_val->floors_allowed;
             $selected['existing_image']=$properties_val->property_image;
 
         }
@@ -242,8 +247,8 @@ class propertiesController extends Controller
             'furnishing'=>$request->furnishing,
             'reserve_parking'=>$request->reserve_parking,
             'floor_details'=>$request->floor_details,
-            'floor_details_type'=>$request->property_type,
-            'floors_allowed'=>$request->floor_details_type,
+            'floor_details_type'=>$request->floor_details_type,
+            'floors_allowed'=>$request->floors_allowed,
             'boundary'=>$request->boundary,
             'open_sides'=>$request->open_sides,
             'any_construction'=>$request->any_construction,
@@ -284,6 +289,7 @@ class propertiesController extends Controller
             'faching_type'=>$request->faching_type,
             'faching_type'=>$request->faching_type,
             'apartment_society'=>$request->apartment_society,
+            'property_suggest'=>$request->property_suggest,
             'Located_inside'=>$request->Located_inside,
             ];
             // return $properties;
@@ -297,8 +303,11 @@ class propertiesController extends Controller
             }
             return response()->json(['status' => 200, 'message' => 'Properties '.$message.' Successfuly']);
         }
-        
-        return view("admin/pages/properties/create",compact('selected'));
+        $residential = PropertyCategory::where('type',1)->get();
+        $commercial = PropertyCategory::where('type',2)->get();
+       
+
+        return view("admin/pages/properties/create",compact('selected', 'residential','commercial'));
     }
 
 
@@ -310,4 +319,22 @@ class propertiesController extends Controller
         return response()->json(['status' => 200, 'message' => 'Property Deleted
          successfuly']);
     }
+
+
+    public function get(request $request){
+        $categories_val = PropertyCategory::where('type', $request->p_type)->get();
+        // return $categories_val;
+        $selected= "";
+        $selected = '<option value="">Select</option>';
+        foreach ($categories_val as $key => $value) {
+            $selected.= '<option value="'. $value["id"] .'" >'. $value["name"] .'</option>';
+        }
+        return response()->json(['status' => 200, 'data' => $selected]);
+
+    }
+
+    
+    // .$properties_val->properties_type == $value["name"] ? 'selected' : ''.
+
+
 }

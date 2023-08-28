@@ -49,6 +49,14 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('properties/create', [App\Http\Controllers\propertiesController::class, 'create'])->name('properties/create');
     Route::post('properties/create', [App\Http\Controllers\propertiesController::class, 'create'])->name('properties/create');
     Route::get('properties/delete/{id}', [App\Http\Controllers\propertiesController::class, 'delete'])->name('properties/delete/{id}');
+    Route::get('properties/ptype',[App\Http\Controllers\propertiesController::class, 'get'])->name('properties/ptype');
+
+    //kind..
+    Route::get('kind/index', [App\Http\Controllers\kindController::class, 'index'])->name('kind/index');
+    Route::get('kind/create', [App\Http\Controllers\kindController::class, 'create'])->name('kind/create');
+    Route::post('kind/create', [App\Http\Controllers\kindController::class, 'create'])->name('kind/create');
+    Route::get('kind/delete/{id}', [App\Http\Controllers\kindController::class, 'delete'])->name('kind/delete/{id}');
+
     //User
     Route::get('users/index', [App\Http\Controllers\userController::class, 'index'])->name('users/index');
     Route::get('users/create', [App\Http\Controllers\userController::class, 'create'])->name('users/create');

@@ -7,15 +7,14 @@ $(function () {
        "ajax": "index",
        "columns": [
             {data: 'id', name: 'id'},
-            {data: 'property_type', name: 'property_type'},
-            {data: 'city', name: 'city'},
-            {data: 'property_cat', name: 'property_cat'},
+            {data: 'kind', kind: 'kind'},
+            {data: 'kinds_type', name: 'kinds_type'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
  
-  propertyDelete = ($id) => {
+  kindDelete = ($id) => {
     var conf = confirm('Are You Sure?');
         if(!conf){
             return false;
