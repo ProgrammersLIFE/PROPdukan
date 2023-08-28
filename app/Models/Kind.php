@@ -1,17 +1,17 @@
 <?php
 
 namespace App\Models;
-USE DB;
-
+use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Property extends Model
+class Kind extends Model
 {
     use HasFactory;
+    protected $table= "kinds";
     protected $guarded;
-    
-    public function getProperties(){
-        return DB::table('properties')->get();
+
+    public function getKind(){
+        return DB::table('kinds')->get();
     }
 }

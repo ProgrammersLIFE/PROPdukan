@@ -28,6 +28,9 @@ class categoryController extends Controller
         if ($request->ajax()) {
             $data = $this->Property_Category->getCategories();
             return Datatables::of($data)
+            ->editColumn('type', function ($row) {
+                return  $row->type == 1 ? 'Residential' : 'Commercial';
+            })
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        
