@@ -15,7 +15,7 @@ class userController extends Controller
     public function index(request $request){
         if ($request->ajax()) {
             $data = $this->Users->getUsers();
-            return Datatables::of($data)
+            return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        

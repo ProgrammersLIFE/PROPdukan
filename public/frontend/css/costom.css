@@ -1,0 +1,128 @@
+.search-input{
+    border: 1px solid black;
+}
+
+.dropdown-search{
+    text-align: left;
+    background-color: white;
+    width: 65%;
+    min-height: 200px;
+    border-radius: 10px;
+    position: absolute;
+    margin-top: 55px;
+    margin-left: 2px;
+    box-shadow: 2px 2px 2px rgba(209, 209, 209, 0.187),-2px 2px 2px rgba(209, 209, 209, 0.187), 2px -2px 2px rgba(209, 209, 209, 0.187), -2px -2px 2px rgba(209, 209, 209, 0.187);
+}
+
+.dropdown-search option{
+    padding: 10px;
+    padding-left: 10px;
+}
+
+.dropdown-search option:hover{
+        background-color: #FF385C;
+        border-radius: 5px;
+        color: white;
+}
+
+.hide{
+    display: none;
+}
+
+#serch-dropdown{
+    margin-right: 50px;
+    width: 700px;
+    padding-left: 50px;
+    
+}
+
+#serch-dropdown:hover{
+    box-shadow: 1px 1px 3px #ff385d, -1px -1px 3px #ff385d;
+}
+
+#scr{
+    position: absolute;
+    font-size: 20px;
+    margin-top: 9px;
+    padding-left: 20px;
+}
+
+#loc{
+    margin-top: 6px;
+    margin-left: 10px;
+}
+
+#loc i{
+    font-size: 25px;
+    color: rgb(0, 8, 99);
+}
+
+
+.head-search{
+    text-align: left;
+    background-color: white;
+    width: 65%;
+    min-height: 200px;
+    border-radius: 10px;
+    position: absolute;
+    margin-top: 55px;
+    margin-left: 108px;
+    box-shadow: 2px 2px 2px rgba(209, 209, 209, 0.187),-2px 2px 2px rgba(209, 209, 209, 0.187), 2px -2px 2px rgba(209, 209, 209, 0.187), -2px -2px 2px rgba(209, 209, 209, 0.187);
+}
+
+.head-search option{
+    padding: 10px;
+    padding-left: 10px;
+}
+
+.head-search option:hover{
+        background-color: #FF385C;
+        border-radius: 5px;
+        color: white;
+}
+
+#serch-head{
+    margin-left: 96px;
+    margin-right: -34px;
+    padding-left: 50px;
+    
+}
+
+#serch-head:hover{
+    box-shadow: 1px 1px 3px #ff385d, -1px -1px 3px #ff385d;
+}
+
+#hed{
+    position: absolute;
+    font-size: 20px;
+    margin-top: 9px;
+    padding-left: 107px;
+}
+
+#loc-hed{
+    margin-top: 6px;
+    margin-left: 84px;
+}
+
+#loc-hed i{
+    font-size: 25px;
+    color: rgb(0, 8, 99);
+}
+
+.act1{
+    margin-top: 12px;
+}
+
+.act1 .act{
+    border-radius: 10px;
+    padding: 12px 25px 12px 25px;
+    text-decoration: none;
+    background-color: #FF385C;
+    color: white;
+}
+
+.act1 .act:hover{
+    color: #FF385C;
+    background-color: white;
+    box-shadow: 1px 1px 2px #ff385d34, -1px 1px 2px #ff385d34, 1px -1px 2px #ff385d34, -1px -1px 2px #ff385d34;
+}
