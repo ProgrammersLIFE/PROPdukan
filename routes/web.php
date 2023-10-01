@@ -32,24 +32,25 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('dashboard5', [App\Http\Controllers\adminController::class, 'dashboard5'])->name('dashboard5');
     Route::get('dashboard6', [App\Http\Controllers\adminController::class, 'dashboard6'])->name('dashboard6');
     Route::get('admin-logout', [App\Http\Controllers\adminController::class, 'logout'])->name('admin-logout');
-    //Route
+    //Route...
     Route::get('routes/index', [App\Http\Controllers\routeController::class, 'index'])->name('routes/index');
     Route::get('routes/create', [App\Http\Controllers\routeController::class, 'create'])->name('routes/create');
     Route::post('routes/create', [App\Http\Controllers\routeController::class, 'create'])->name('routes/create');
     Route::get('routes/delete/{id}', [App\Http\Controllers\routeController::class, 'delete'])->name('routes/delete');
     
-    //property categories
+    //property categories...
     Route::get('property/index', [App\Http\Controllers\categoryController::class, 'index'])->name('property/categories');
     Route::get('property/create', [App\Http\Controllers\categoryController::class, 'create'])->name('property/create');
     Route::post('property/create', [App\Http\Controllers\categoryController::class, 'create'])->name('property/create');
     Route::get('property/delete/{id}', [App\Http\Controllers\categoryController::class, 'delete'])->name('property/delete/{id}');
     Route::get('routes/delete/{id}', [App\Http\Controllers\routeController::class, 'delete'])->name('routes/delete');
-    //properties
+    //properties...
     Route::get('properties/index', [App\Http\Controllers\propertiesController::class, 'index'])->name('properties/create');
     Route::get('properties/create', [App\Http\Controllers\propertiesController::class, 'create'])->name('properties/create');
     Route::post('properties/create', [App\Http\Controllers\propertiesController::class, 'create'])->name('properties/create');
     Route::get('properties/delete/{id}', [App\Http\Controllers\propertiesController::class, 'delete'])->name('properties/delete/{id}');
-    Route::get('properties/ptype',[App\Http\Controllers\propertiesController::class, 'get'])->name('properties/ptype');
+    Route::get('properties/ptype',[App\Http\Controllers\propertiesController::class, 'getting'])->name('properties/ptype');
+    Route::get('properties/kindget',[App\Http\Controllers\propertiesController::class, 'kindGet'])->name('properties/kindget');
 
     //kind..
     Route::get('kind/index', [App\Http\Controllers\kindController::class, 'index'])->name('kind/index');
@@ -57,7 +58,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::post('kind/create', [App\Http\Controllers\kindController::class, 'create'])->name('kind/create');
     Route::get('kind/delete/{id}', [App\Http\Controllers\kindController::class, 'delete'])->name('kind/delete/{id}');
 
-    //User
+    //User...
     Route::get('users/index', [App\Http\Controllers\userController::class, 'index'])->name('users/index');
     Route::get('users/create', [App\Http\Controllers\userController::class, 'create'])->name('users/create');
     Route::post('users/create', [App\Http\Controllers\userController::class, 'create'])->name('users/create');
@@ -65,7 +66,7 @@ Route::middleware('auth:admin')->group(function(){
 
 });
 
-// Forgot Password
+// Forgot Password...
 Route::get('forgot-password', [adminController::class, 'forgotPassword'])->name('forgot-password');
 Route::post('forgot-password', [adminController::class, 'forgotPasswordSubmit'])->name('forgot-password');
 Route::get('reset-password/{token}', [adminController::class, 'resetPassword'])->name('reset-password/{token}');

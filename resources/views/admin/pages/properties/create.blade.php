@@ -30,7 +30,15 @@
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content-header -->
-
+      @if ($selected['property_cat'] == 2)
+        @php
+          $hide = 'show';
+        @endphp
+    @else
+      @php
+        $hide = 'phide';
+      @endphp
+    @endif
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -70,7 +78,7 @@
                             <select id="property_type"   name="property_type" class="form-control "> 
                               <option  value="">Select</option>
                               <option  {{ $selected['property_type'] == 'sell' ? 'selected' : '' }} value="sell">Sell</option>
-                              <option  {{ $selected['property_type'] == 'Rent/Lease' ? 'selected' : '' }} value="rent/lease">Rent/Lease</option>
+                              <option  {{ $selected['property_type'] == 'rent/lease' ? 'selected' : '' }} value="rent/lease">Rent/Lease</option>
                               <option  {{ $selected['property_type'] == 'rent' ? 'selected' : '' }} value="rent">Rent</option>
                               <option  {{ $selected['property_type'] == 'pg' ? 'selected' : '' }} class="pg" value="pg">PG</option>
                             </select>
@@ -91,27 +99,40 @@
                           <select id="properties_type" required name="properties_type" class="form-control properties_type"> 
                             <option value="">Select</option>
                             @if ($selected['property_cat'] == 2){
-                              @foreach ($commercial as $key => $value)
-                                <option {{ $selected['properties_type'] == $value['name'] ? 'selected' : '' }} value="{{ $value['name'] }}">{{ $value['name'] }}</option>';
-                            @endforeach
+                                @php
+                                    $data = $commercial;
+                                @endphp
                             }@else{
-                              @foreach ($residential as $key => $value)
-                                <option {{ $selected['properties_type'] == $value['name'] ? 'selected' : '' }} value="{{ $value['name'] }}">{{ $value['name'] }}</option>';
+                              @php
+                                  $data = $residential;
+                              @endphp
+                            }@endif
+                              @foreach ($data as $key => $Dvalue)
+                                <option {{ $selected['properties_type'] == $Dvalue['name'] ? 'selected' : '' }} value="{{ $Dvalue['name'] }}">{{ $Dvalue['name'] }}</option>';
                             @endforeach
-                            } @endif
                           </select>
-                          </div>
+                          </div>  
                         </div>
                         </div>
 
                         <div class="col-md-12" >
-                          <div class="form-group hide" id="comtype">
-                          <label for="">What kind of ?</label>
-                          <select id="property_type" name="what_kind" class="form-control "> 
+                          <div class="form-group {{$hide}}" id="comtype">
+                          <label for="" class="kind_t">What kind of {{ $selected['property_cat'] == 2 ? $selected['properties_type'] : '' }} is it ?</label>
+                          <select id="kinds_type" name="what_kind" class="form-control kinds_type"> 
                             <option>Select</option>
-                            <option {{ $selected['what_kind'] == 1 ? 'selected' : '' }} value="1">1</option>
-                            <option {{ $selected['what_kind'] == 2 ? 'selected' : '' }} value="2">2</option>
-                            <option {{ $selected['what_kind'] == 3 ? 'selected' : '' }} value="3">3</option>
+                            @if ($selected['property_cat'] == 2){
+                              @php
+                                  $kinds = $kind;
+                              @endphp
+                              @foreach ($kinds as $key=> $value )
+                              <option {{ $selected['what_kind'] == $value['what_kind'] ? 'selected' : '' }} value="{{ $value['what_kind'] }}">{{ $value['what_kind'] }}</option>';
+                                  
+                              @endforeach
+                          }@else{
+                            
+                          }@endif
+                             
+                           
                           </select>
                           </div>
                         </div>
@@ -134,18 +155,10 @@
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="exampleInputEmail1">City</label>
-                            <input type="text" required class="form-control" value="{{ $selected['Located_inside'] }}" name="city" placeholder="Enter Your City name">
+                            <input type="text" required class="form-control" value="{{ $selected['city'] }}" name="city" placeholder="Enter Your City name">
                           </div>
                         </div>
-                        @if ($selected['property_cat'] == 2)
-                          @php
-                          $hide = 'show';
-                          @endphp
-                        @else
-                          @php
-                          $hide = 'phide';
-                          @endphp
-                        @endif
+                       
 
                         <div class="col-md-4">
                           <div class="form-group commercialtype {{$hide}}">
@@ -245,29 +258,40 @@
                       </a>
                     </h6>
                   </div>
-                  @php
-                        $your_apartment = [
-                          '2_BHK' => '2_BHK',
-                          '3_BHK' => '3_BHK',
-                          '4_BHK' => '4_BHK ',
-                          'other' =>'Other',
-                        ];
-                        @endphp
+                 
+                        
+                  @if ($selected['properties_type'] == 'Land')
+                      @php
+                        $room = 'hide';
+                      @endphp 
+                    @else
+                      @php
+                        $room = '';
+                      @endphp 
+                  @endif
 
+                  @php
+                  $your_apartment = [
+                    '2_BHK' => '2_BHK',
+                    '3_BHK' => '3_BHK',
+                    '4_BHK' => '4_BHK ',
+                    'other' => 'Other',
+                  ];
+                  @endphp
                   <div id="collapseTwo" class="collapse show" data-parent="#accordion">
                     <div class="card-body us_property ">
                       <div class="row">
                         <div class="col-md-12">
-                          <div class="form-group">
+                          <div class="form-group apartment {{$room}}">
                             <label for="exampleInputPassword1">Your apartment is a</label>
                             <select class="form-control" required name="your_apartment">
                               <option value="">select</option>
-                              @foreach ($your_apartment as $y_key=> $y)
-                              <option {{ $selected['your_apartment'] == $y_key ? 'selected' : '' }} value="{{ $z_key }}">{{ $y }}</option>
+                              @foreach ($your_apartment as $ap_key=> $ap)
+                              <option {{ $selected['your_apartment'] == $ap_key ? 'selected' : '' }} value="{{ $ap_key }}">{{ $ap }}</option>
                             @endforeach
                             </select>
                             <div class="card card-secondary mt-3">
-                              <div class="card-header us_property ">
+                              <div class="card-header us_property bedroom {{ $selected['properties_type'] == 'Land' ? 'hide' : 'show'}}">
                                 <h6>Add Room Dttails</h6>
                               </div>
 
@@ -280,12 +304,13 @@
                               ];
                               @endphp
 
-                              <div class="card-body">
+                             
+                              <div class="card-body bedroom {{$room}} ">
                                 <div class="row">
                                   <div class="col-md-12">
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">No. of Bedrooms</label>
-                                      <select class="form-control" required name="no_of_bedrooms">
+                                      <select class="form-control" name="no_of_bedrooms">
                                         <option value="">select</option>
                                         @foreach ($bedrooms as $b_key=> $b)
                                         <option {{ $selected['no_of_bedrooms'] == $b_key ? 'selected' : '' }} value="{{ $b_key }}">{{ $b }}</option>
@@ -353,7 +378,16 @@
                                     <input type="number" class="form-control" value="{{ $selected['super_area'] }}" name="super_area" placeholder="Super Built-up Area">
                                   </div>
                                 </div>
-                                <div class="col-md-6">
+                                @php
+                                    $Dimensions = 'hide';
+                                @endphp
+                                @if ($selected['properties_type'] == 'Land')
+                                  @php
+                                      $Dimensions = '';
+                                  @endphp
+                                @else
+                                @endif
+                                <div class="col-md-6 Dimensions {{$Dimensions}}">
                                   <div class="form-group">
                                     <label for="exampleInputPassword1">Property Dimensions(Optional)</label>
                                     <input type="number" class="form-control"  value="{{ $selected['length'] }}"  name="length" placeholder="Length ofplot(in Ft.)">
@@ -363,7 +397,7 @@
                                   </div>
                                 </div>
                                 <div class="col-md-12">
-                                  <div class="form-group">
+                                  <div class="form-group bedroom {{$room}}">
                                     @php
                                     $other_rooms = [
                                        'pooja_room' =>'Pooja Room',
@@ -372,22 +406,24 @@
                                        'store_room' =>'Store Room',
                                     ];
                                     @endphp
+                                    
+
                                     <label for="exampleInputPassword1">Other Room(Optional)</label>
                                     <div class="select2-primary">
-                                     <input type="hidden" name="other_room" class="other_room" value="">
-                                      <select class="select2 other_rooms"  name="other_rooms" multiple="multiple" data-placeholder="Select Other room" data-dropdown-css-class="select2-primary" style="width: 100%;">
+                                     <input type="hidden" name="other_rooms" class="other_rooms" value="">
+                                      <select class="select2 other_room"  name="other_room" multiple="multiple" data-placeholder="Select Other room" data-dropdown-css-class="select2-primary" style="width: 100%;">
                                         <option value="">Select</option>
                                         
                                         <option value="">0</option>
                                         @foreach ($other_rooms as $r_key=> $r)
-                                        <option {{ $selected['other_rooms'] == $r_key ? 'selected' : '' }} value="{{ $r_key }}">{{ $r }}</option>
+                                        <option {{ $selected['other_rooms'] == $r_key ? 'selected' : '' }}  value="{{ $r_key }}">{{ $r }}</option>
                                       @endforeach
                                       </select>
                                     </div>
                                   </div>
                                 </div>
                                 <div class="col-md-6">
-                                  <div class="form-group">
+                                  <div class="form-group bedroom {{$room}}">
                                     @php
                                     $Furnishing = [
                                        'furnished' =>'Furnished',
@@ -406,7 +442,7 @@
                                   </div>
                                 </div>
                                 <div class="col-md-6">
-                                  <div class="form-group">
+                                  <div class="form-group bedroom {{$room}}">
                                     <label for="exampleInputPassword1">Reserved Parking(Optional)</label>
                                     <select class="form-control" name="reserve_parking">
                                       <option value="">Select</option>
@@ -416,7 +452,7 @@
                                   </div>
                                 </div>
                                 <div class="col-md-12">
-                                  <div class="form-group">
+                                  <div class="form-group bedroom {{$room}}">
                                     @php
                                     $floor_details = [
                                        'basement' =>'Basement',
@@ -435,7 +471,7 @@
                                   </div>
                                 </div>
                                 <div class="col-md-6">
-                                  <div class="form-group">
+                                  <div class="form-group bedroom {{$room}}">
                                     <label for="exampleInputPassword1">Floors Allowed For Construction</label>
                                     <input type="number" class="form-control" value="{{ $selected['floors_allowed']}}" name="floors_allowed" placeholder="No. of floors">
                                   </div>
@@ -768,7 +804,7 @@
                     <div class="card-body">
                       <div class="row">
                         <div class="col-md-6">
-                          <div class="form-group">
+                          <div class="form-group bedroom {{$room}}">
                             @php
                             $amenities = [
                                   'park' =>'Park',
@@ -783,8 +819,8 @@
                               @endphp
                             <label for="exampleInputPassword1">Aminities</label>
                             <div class="select2-primary">
-                              <input type="hidden" name="amenitie" class="amenitie" value="">
-                              <select class="select2 form-control amenities" name="amenities" multiple="multiple" data-placeholder="Select Other Amenities" data-dropdown-css-class="select2-primary" style="width: 100%;">
+                              <input type="hidden" name="amenities" class="amenities" value="">
+                              <select class="select2 form-control amenitie" name="amenitie" multiple="multiple" data-placeholder="Select Other Amenities" data-dropdown-css-class="select2-primary" style="width: 100%;">
                                 <option value="">Select</option>
                                 @foreach ($amenities as $ami_key=> $ami)
                                     <option {{ $selected['amenities'] == $ami_key ? 'selected' : '' }} value="{{ $ami_key }}">{{ $ami }}</option>
@@ -795,7 +831,7 @@
                         </div>
 
                         <div class="col-md-6">
-                          <div class="form-group">
+                          <div class="form-group bedroom {{$room}}">
                             @php
                             $propert_feature = [
                               'internet/wi-fi_connectivity'=>'Internet/Wi-fi connectivity',
@@ -824,7 +860,7 @@
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="form-group">
+                          <div class="form-group bedroom {{$room}}">
                             @php
                             $society_buildings = [
                               'water_softening_plant'=>'Water Softening plant',
@@ -848,7 +884,7 @@
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="form-group">
+                          <div class="form-group bedroom {{$room}}">
                             @php
                             $additional_feature = [
                                 'Separate_entry_For_servant_room'=>'Separate entry For servant room ',
@@ -919,6 +955,24 @@
 
                         <div class="col-md-6">
                           <div class="form-group">
+                            @php
+                            $power_back_up = [
+                                  'none' =>'None',
+                                  'partial' =>'Partial',
+                                  'full' =>'Full',
+                              ];
+                              @endphp
+                            <label for="exampleInputPassword1">Power Back Up </label>
+                            <select class="form-control" name="power_back_up">
+                              <option value="">Select</option>
+                              @foreach ($power_back_up as $power_key=> $power)
+                                    <option {{ $selected['power_back_up'] == $power_key ? 'selected' : '' }} value="{{ $power_key }}">{{ $power }}</option>
+                                  @endforeach
+                            </select>
+                          </div>
+                        </div> 
+                        <div class="col-md-6">
+                          <div class="form-group bedroom {{$room}}">
                             <label for="exampleInputPassword1">Other Features</label>
                             <div class="form-check">
                               <input type="checkbox" class="form-check-input" value="gated_society" name="other_features" id="is_parent">
@@ -935,24 +989,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            @php
-                            $power_back_up = [
-                                  'none' =>'None',
-                                  'partial' =>'Partial',
-                                  'full' =>'Full',
-                              ];
-                              @endphp
-                            <label for="exampleInputPassword1">Power Back Up </label>
-                            <select class="form-control" name="power_back_up">
-                              <option value="">Select</option>
-                              @foreach ($power_back_up as $power_key=> $power)
-                                    <option {{ $selected['power_back_up'] == $power_key ? 'selected' : '' }} value="{{ $power_key }}">{{ $power }}</option>
-                                  @endforeach
-                            </select>
-                          </div>
-                        </div>
+                        
                         <div class="col-md-6">
                           <div class="form-group">
                             @php
@@ -961,9 +998,9 @@
                               'south'=>'South',
                               'south'=>'East',
                               'west'=>'West',
-                              'north-east<'=>'North-East',
+                              'north-east'=>'North-East',
                               'north-west'=>'North-West',
-                              'south-eas'=>'South-East',
+                              'south-east'=>'South-East',
                               'south-west'=>'South-West',
                               ];
                               @endphp
@@ -978,7 +1015,7 @@
                         </div>
 
                         <div class="col-md-6">
-                          <div class="form-group">
+                          <div class="form-group bedroom {{$room}}">
                             @php
                             $type_of_flooring = [
                               'marbel' =>'Marbel',
@@ -1015,7 +1052,7 @@
                         </div>
 
                         <div class="col-md-2">
-                          <div class="form-group">
+                          <div class="form-group bedroom {{$room}}">
                           <label for="exampleInputPassword1"></label>
                             <select class="form-control mt-4" name="faching_type" > 
                               <option value="">Select</option>

@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\PropertyCategory;
 use App\Models\Property;
+use App\Models\Kind;
 use DataTables;
 use Session;
 use Auth;
@@ -23,7 +23,6 @@ class propertiesController extends Controller
     public function index(request $request){
         if ($request->ajax()) {
             $data = $this->Properties->getProperties();
-            // return $data;
             return DataTables::of($data)
             ->editColumn('property_cat', function ($row) {
                 return  $row->property_cat == 1 ? 'Residential' : 'Commercial';
@@ -48,14 +47,6 @@ class propertiesController extends Controller
     }
 
     public function create(request $request){
-        // return $request->p_id;
-        // $categories_val = PropertyCategory::where('type', 1)->get();
-        // return $categories_val;
-
-        // $kkk=[
-        //     'commercial'=> 'commercial',
-        //     '2'=> 'industrial',
-        // ]
 
         $selected = [
             'id' => null,
@@ -97,7 +88,6 @@ class propertiesController extends Controller
             'brokers_contacting' =>null,
             'avaiable_type' =>null,
             'suitable' =>null,
-            // 'property_imagenull,
             'ownership'=>null,
             'excepted_price'=>null,
             'persft_price'=>null,
@@ -305,9 +295,9 @@ class propertiesController extends Controller
         }
         $residential = PropertyCategory::where('type',1)->get();
         $commercial = PropertyCategory::where('type',2)->get();
-       
+        $kind = Property::where('properties_type',$selected['properties_type'])->get();
 
-        return view("admin/pages/properties/create",compact('selected', 'residential','commercial'));
+        return view("admin/pages/properties/create",compact('selected', 'residential','commercial', 'kind'));
     }
 
 
@@ -321,20 +311,28 @@ class propertiesController extends Controller
     }
 
 
-    public function get(request $request){
+    public function getting(request $request){
         $categories_val = PropertyCategory::where('type', $request->p_type)->get();
-        // return $categories_val;
         $selected= "";
         $selected = '<option value="">Select</option>';
         foreach ($categories_val as $key => $value) {
-            $selected.= '<option value="'. $value["id"] .'" >'. $value["name"] .'</option>';
+            $selected.= '<option value="'. $value["name"] .'" >'. $value["name"] .'</option>';
         }
         return response()->json(['status' => 200, 'data' => $selected]);
 
     }
 
-    
-    // .$properties_val->properties_type == $value["name"] ? 'selected' : ''.
+
+    public function kindGet(request $request){
+        $kind_val = Kind::where('kinds_type', $request->data)->get();
+        $selected= "";
+        $selected = '<option value="">Select</option>';
+        foreach ($kind_val as $key => $value) {
+            $selected.= '<option value="'. $value["kind"] .'" >'. $value["kind"] .'</option>';
+        }
+        return response()->json(['status' => 200, 'data' => $selected]);
+
+    }
 
 
 }

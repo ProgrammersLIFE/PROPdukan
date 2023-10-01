@@ -18,12 +18,10 @@ $(document).ready(function () {
             cache: false,
             processData: false,
             success: function (response) {
-                // console.log(response);
                 if(response.status == 200){
                     $('.alert-success').removeClass('hide');
                     $('.message').text(response.message);
                         getcat();
-
                 }
             }
         }); 
@@ -33,13 +31,47 @@ $(document).ready(function () {
         location.reload();
     });
 
+
+    $('#properties_type').change(function(e){
+        e.preventDefault();
+        var type = $(this).val();
+        if(type == 'Land'){
+            $('.Dimensions').removeClass('hide');
+            $('.bedroom').addClass('hide');
+            $('.apartment').addClass('hide');
+        }else if(type == 'Plot/Land'){
+            $('.Dimensions').removeClass('hide');
+            $('.bedroom').addClass('hide');
+            $('.apartment').addClass('hide');
+        }else{
+            $('.bedroom').removeClass('hide');
+            $('.apartment').removeClass('hide');
+            $('.Dimensions').addClass('hide');
+        }
+
+        if ($('.commercial').is(':checked') == true) {
+            $('.kind_t').text('What kind of'  + ' '+type+' ' +   'is it ?');
+            $.ajax({
+                type: "get",
+                url: 'kindget',
+                data: {data:type},
+                dataType: 'JSON',
+                success: function (response) {
+                    $('.kinds_type').html(response.data);
+                    
+                }
+            }); 
+        }
+        
+    })
+
+
     $('#property_type').change(function (e) { 
         e.preventDefault();
         var property_type = $('#property_type').val();
         if(property_type == 'pg'){
             $('.commercial').addClass('hide');
-            $('#comtype').addClass('hide');
-            // $('.residential').attr('checked');
+            $('#comtype').addClass('phide');
             $("input[name='residential'][value='residential']").prop("checked", true);
         }else{
             $('.commercial').removeClass('hide')
@@ -49,7 +81,7 @@ $(document).ready(function () {
     $('.commercial').click(function(){
         if($(this).is(':checked') == 1){
             $('.lease_ty').removeClass('hide');
-            $('#comtype').removeClass('hide');
+            $('#comtype').removeClass('phide');
             $('.commercialtype').removeClass('phide');
 
         }
@@ -59,13 +91,12 @@ $(document).ready(function () {
         if($(this).is(':checked') == 1){
           var type =  $(this).val();
 
-            $('#comtype').addClass('hide');
+            $('#comtype').addClass('phide');
             $('.commercialtype').addClass('phide');
             $('.lease_ty').addClass('hide');
-            // console.log(type);
 
         }else{
-            $('#comtype').removeClass('hide');
+            $('#comtype').removeClass('phide');
             $('.commercialtype').removeClass('phide')
         }
     })
@@ -78,7 +109,6 @@ $(document).ready(function () {
             data: {p_type:id},
             dataType: 'JSON',
             success: function (response) {
-                // console.log(response.data);
                 $('.properties_type').html(response.data);
             }
         });
@@ -122,17 +152,17 @@ $(document).ready(function () {
 
     $('.property-feature').on('change', function() {
         var selectedValues = $(this).val();
-        $('.propert_featureS').val(selectedValues);
+        $('.propert_features').val(selectedValues);
     });
 
-    $('.other_rooms').on('change', function() {
+    $('.other_room').on('change', function() {
         var selectedValues = $(this).val();
-        $('.other_room').val(selectedValues);
+        $('.other_rooms').val(selectedValues);
     });
 
-    $('.amenities').on('change', function() {
+    $('.amenitie').on('change', function() {
         var selectedValues = $(this).val();
-        $('.amenitie').val(selectedValues);
+        $('.amenities').val(selectedValues);
     });
     
     $('.society_buildings').on('change', function() {
